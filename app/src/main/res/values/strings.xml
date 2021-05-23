@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">TwitchTopGames</string>
-    <string name="channels">Количество каналов: %1$d</string>
+    <string name="network_error">Интернет-соединение отсутствует</string>
 </resources>

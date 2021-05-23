@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,8 +20,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:paddingStart="4dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/viewers_count"
         app:layout_constraintEnd_toEndOf="@+id/gameCover"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameCover"
@@ -32,44 +31,42 @@
         android:id="@+id/viewers_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/channels_imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameName"
         app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
 
     <TextView
         android:id="@+id/viewers_count"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingStart="4dp"
         android:gravity="center|start"
+        android:paddingStart="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/viewers_image"
         app:layout_constraintEnd_toEndOf="@+id/gameCover"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/viewers_image"
-        app:layout_constraintTop_toBottomOf="@+id/gameName"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="1235"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toTopOf="@+id/viewers_image"
+        tools:ignore="RtlSymmetry"
+        tools:text="1235" />
 
     <TextView
         android:id="@+id/channels_count"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingStart="4dp"
         android:gravity="center|start"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        android:paddingStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/gameCover"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/viewers_count"
+        app:layout_constraintStart_toEndOf="@+id/channels_imageView"
+        app:layout_constraintTop_toTopOf="@+id/channels_imageView"
         tools:ignore="RtlSymmetry"
         tools:text="18" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/channels_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewers_image"
         app:srcCompat="@drawable/ic_baseline_live_tv_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
