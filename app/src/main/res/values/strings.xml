@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TwitchTopGames</string>
-    <string name="network_error">Интернет-соединение отсутствует</string>
+    <string name="do_you_like_our_app">Как вам наше приложение?</string>
+    <string name="app_review">Оставьте отзыв</string>
+    <string name="send">Отправить</string>
+    <string name="cancel">Отмена</string>
 </resources>

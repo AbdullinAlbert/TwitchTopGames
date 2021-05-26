@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -34,4 +36,17 @@ class MainActivity : AppCompatActivity() {
         }
         binding.root.setOnRefreshListener {  adapter.refresh() }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.review) {
+            AppReviewDialogFragment().show(supportFragmentManager, AppReviewDialogFragment.TAG)
+            return true
+        } else return super.onOptionsItemSelected(item)
+    }
+
 }
