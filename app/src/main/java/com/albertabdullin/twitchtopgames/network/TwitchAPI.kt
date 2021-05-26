@@ -16,7 +16,7 @@ interface TwitchTopGamesAPI {
     suspend fun getNextTopGames(
         @Header("Accept") accept: String = "application/vnd.twitchtv.v5+json",
         @Header("Client-ID") clientId: String = "sd4grh0omdj9a31exnpikhrmsu3v46",
-        @QueryMap filters: Map<String, String>): Root
+        @QueryMap query: Map<String, String>): Root
 }
 
 private val moshi = Moshi.Builder()

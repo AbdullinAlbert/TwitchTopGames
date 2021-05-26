@@ -19,12 +19,14 @@
         android:id="@+id/gameName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/viewers_count"
         app:layout_constraintEnd_toEndOf="@+id/gameCover"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameCover"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="Mass Effect 2" />
 
     <ImageView

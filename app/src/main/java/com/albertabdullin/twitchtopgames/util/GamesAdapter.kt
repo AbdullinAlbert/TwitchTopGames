@@ -3,6 +3,7 @@ package com.albertabdullin.twitchtopgames.util
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import com.albertabdullin.twitchtopgames.database.GameEntity
 import com.albertabdullin.twitchtopgames.databinding.AdapterItemBinding
 import com.bumptech.glide.Glide
 
-class GamesAdapter : ListAdapter<GameEntity, GamesAdapter.GameItemViewHolder>(
+class GamesAdapter : PagingDataAdapter<GameEntity, GamesAdapter.GameItemViewHolder>(
     GameItemDiffUtilCallback()) {
 
     class GameItemViewHolder private constructor(private val binding: AdapterItemBinding)
@@ -25,15 +26,17 @@ class GamesAdapter : ListAdapter<GameEntity, GamesAdapter.GameItemViewHolder>(
             }
         }
 
-        fun bind(item: GameEntity) {
-            binding.gameName.text = item.name
-            binding.viewersCount.text = item.viewersCount.toString()
-            binding.channelsCount.text = item.channelCount.toString()
-            val imgUri = item.cover.toUri().buildUpon().scheme("https").build()
-            Glide.with(binding.gameCover.context)
-                .load(imgUri)
-                .error(R.drawable.ic_baseline_broken_image_24)
-                .into(binding.gameCover)
+        fun bind(item: GameEntity?) {
+            item?.also {
+                binding.gameName.text = it.name
+                binding.viewersCount.text = it.viewersCount.toString()
+                binding.channelsCount.text = it.channelCount.toString()
+                val imgUri = it.cover.toUri().buildUpon().scheme("https").build()
+                Glide.with(binding.gameCover.context)
+                        .load(imgUri)
+                        .error(R.drawable.ic_baseline_broken_image_24)
+                        .into(binding.gameCover)
+            }
         }
     }
 

@@ -1,16 +1,23 @@
 package com.albertabdullin.twitchtopgames.ui
 
+import android.content.Context
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import com.albertabdullin.twitchtopgames.R
 import com.albertabdullin.twitchtopgames.databinding.ActivityMainSwipeRefreshBinding
 import com.albertabdullin.twitchtopgames.util.GamesAdapter
 import com.albertabdullin.twitchtopgames.viewmodel.TwitchTopGamesViewModel
 import com.albertabdullin.twitchtopgames.viewmodel.TwitchTopGamesViewModelFactory
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    @ExperimentalPagingApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainSwipeRefreshBinding.inflate(layoutInflater)
@@ -19,16 +26,12 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, factory).get(TwitchTopGamesViewModel::class.java)
         val adapter = GamesAdapter()
         binding.recyclerView.adapter = adapter
-        viewModel.getGamesList().observe(this) {
-            it?.let {
-                adapter.submitList(it)
+        lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                if (binding.root.isRefreshing) binding.root.isRefreshing = false
+                adapter.submitData(it)
             }
         }
-        viewModel.networkStateError.observe(this) {
-            it?.let {
-                if (it) Toast.makeText(this,getString(R.string.network_error),
-                    Toast.LENGTH_SHORT).show()
-            }
-        }
+        binding.root.setOnRefreshListener {  adapter.refresh() }
     }
 }
