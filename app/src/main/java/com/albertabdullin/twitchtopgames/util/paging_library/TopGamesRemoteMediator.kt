@@ -35,8 +35,8 @@ class TopGamesRemoteMediator(
             }
             database.insertData(response.convertToDatabaseListOfEntity())
             offset += response.top.size
-           val isThereData = offset > response.total
-            MediatorResult.Success(endOfPaginationReached = isThereData)
+           val isEndOfPagination = offset == response.total
+            MediatorResult.Success(endOfPaginationReached = isEndOfPagination)
         } catch (e: IOException) {
             MediatorResult.Error(e)
         } catch (e: HttpException) {
